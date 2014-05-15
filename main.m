@@ -8,4 +8,16 @@ close all % Close all figure windows
 
 display('Solving the equations of motion...')
 
-% TODO: Solve the kinematics
+% Solve the kinematics
+k = kinematicEqns;
+
+% Solve the velocity kinematics
+z = velocityEqns(k);
+
+% TODO: Solve the dynamics
+%eqs = dynamicEqns(k,z);
+
+% TODO: Add feedback linearization
+%eqs = feedbackLinearization(eqs);
+
+display('...equations of motion solved')
