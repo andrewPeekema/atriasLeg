@@ -14,8 +14,8 @@ k = kinematicEqns;
 % Solve the velocity kinematics
 z = velocityEqns(k);
 
-% TODO: Solve the dynamics
-%eqs = dynamicEqns(k,z);
+% Solve the dynamics
+eqs = dynamicEqns(k,z);
 
 % TODO: Add feedback linearization
 %eqs = feedbackLinearization(eqs);

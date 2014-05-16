@@ -2,7 +2,7 @@ function k = kinematicEqns
 % Output
 %   k: kinematics of one leg of ATRIAS
 
-syms q1 r1 q2 r2 q3 q4 real
+syms q1 r1 q2 r2 q3 q6 real
 
 %% The base
 k.f0 = SE3;
@@ -35,7 +35,7 @@ k.h2f0 = k.g2f0*k.h2g2;
 
 
 %% Third link (motor center)
-k.g3h2 = SE3([0 0 0 0 0 q3]);
+k.g3h2 = SE3([0 0 0 0 0 q3-(q2+q1)]);
 k.g3f0 = k.h2f0*k.g3h2;
 k.g3f0.g = simplify(k.g3f0.g,'IgnoreAnalyticConstraints',true); % Clean up notation
 
@@ -69,7 +69,7 @@ k.h5f0 = k.g5f0*k.h5g5;
 
 
 %% Sixth link (motor center)
-k.g6h5 = SE3([0 0 0 0 0 q4]);
+k.g6h5 = SE3([0 0 0 0 0 q6-q1]);
 k.g6f0 = k.h5f0*k.g6h5;
 k.g6f0.g = simplify(k.g6f0.g,'IgnoreAnalyticConstraints',true); % Clean up notation
 

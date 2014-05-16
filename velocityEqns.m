@@ -5,7 +5,7 @@ function z = velocityEqns(k)
 % Output
 %   z: velocity kinematics
 
-syms dq1 dq2 dq3 dq4 real
+syms dq1 dq2 dq3 dq6 real
 
 % The toe is on the ground
 z.f0 = zeros(6,1);
@@ -21,7 +21,7 @@ z.g2 = k.g2f2.invAdj*z.f2;
 z.h2 = k.h2g2.invAdj*z.g2;
 
 % The third link (motor)
-z.g3 = k.g3h2.invAdj*(z.h2+[zeros(5,1); dq3]);
+z.g3 = k.g3h2.invAdj*(z.h2+[zeros(5,1); dq3-(dq2+dq1)]);
 
 % The fourth link
 z.f4 = k.f4f1.invAdj*(z.f1+[zeros(5,1); dq2]);
@@ -34,6 +34,6 @@ z.g5 = k.g5f5.invAdj*z.f5;
 z.h5 = k.h5g5.invAdj*z.g5;
 
 % The sixth link (motor)
-z.g6 = k.g6h5.invAdj*(z.h5+[zeros(5,1); dq4]);
+z.g6 = k.g6h5.invAdj*(z.h5+[zeros(5,1); dq6-dq1]);
 
 end % velocityEqns
