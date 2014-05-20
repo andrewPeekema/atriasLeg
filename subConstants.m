@@ -29,6 +29,14 @@ c6 = c3;
 ks = 1600; % N/rad
 cS = 1.49; % N*s/rad
 
+% PD control variables
+kp = 10000;
+kd = 1000;
+q3des  = 3*pi/4;
+dq3des = 0;
+q6des  = pi/4;
+dq6des = 0;
+
 % Substitute constants into the dynamics
 ddq1 = matlabFunction(subs(eqs.ddq1));
 ddq2 = matlabFunction(subs(eqs.ddq2));

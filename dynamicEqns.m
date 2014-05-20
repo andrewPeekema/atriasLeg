@@ -19,8 +19,8 @@ M3 = [[mm3 zeros(3,3)];
 % Mass matrix of the sixth link
 mm6 = m/2*eye(3,3);
 Im6 = [0 0 0;
-      0 0 0;
-      0 0 I6];
+       0 0 0;
+       0 0 I6];
 M6 = [[mm6 zeros(3,3)];
       [zeros(3,3) Im6]];
 

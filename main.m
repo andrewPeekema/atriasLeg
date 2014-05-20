@@ -17,8 +17,11 @@ z = velocityEqns(k);
 % Solve the dynamics
 eqs = dynamicEqns(k,z);
 
-% TODO: Add feedback linearization
+% TODO: Add feedback linearization instead of PD control
 %eqs = feedbackLinearization(eqs);
+
+% Use PD control
+eqs = pdControl(eqs);
 
 display('...equations of motion solved')
 
@@ -40,7 +43,7 @@ X0 = [pi/4 ...   % q1 (rad)
       0];        % dq6
 
 % Time vector (s)
-t = [0:0.01:1];
+t = [0:0.01:3];
 
 % Integrate the time response of the system
 sol = dynamicsSim(t,X0,ddq1,ddq2,ddq3,ddq6);
