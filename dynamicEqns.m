@@ -32,10 +32,8 @@ syms g real
 V = g*(m/2*k.g3f0.y + m/2*k.g6f0.y);
 
 % Add the spring potential energy
-%{
 syms ks q1 q2 q3 q6 real
 V = V + 1/2*ks*(q3-(q1+q2))^2 + 1/2*ks*(q6-q1)^2;
-%}
 
 % The Lagrangian
 L = T - V;
