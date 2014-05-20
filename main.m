@@ -58,8 +58,6 @@ title('State Space Response')
 xlabel('q1 (rad)')
 ylabel('q2 (rad)')
 
-%{
 % Animate the response
 exportVideo = false;
 animation(c,k,sol,exportVideo);
-%}
