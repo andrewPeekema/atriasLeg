@@ -36,10 +36,10 @@ function dX = dynamics(t,X)
     dX = zeros(8,1);
     % Link 1
     dX(1) = dq1;
-    dX(2) = ddq1(dq1,dq2,q1,q2,q3,q6);
+    dX(2) = ddq1(dq1,dq2,dq3,dq6,q1,q2,q3,q6);
     % Link 2
     dX(3) = dq2;
-    dX(4) = ddq2(dq1,dq2,q1,q2,q3,q6);
+    dX(4) = ddq2(dq1,dq2,dq3,dq6,q1,q2,q3,q6);
     % Link 3 (motor)
     dX(5) = X0(6);
     dX(6) = 0;
