@@ -35,21 +35,25 @@ function dX = dynamics(t,X)
     % Return the state derivative
     dX = zeros(8,1);
     % Link 1
-    dX(1) = dq1;                               % Angular Velocity
-    %dX(2) = ddq1(dq1,dq2,dq3,dq6,q1,q2,q3,q6); % Angular Acceleration
-    dX(2) = ddq1(dq1,dq2,q1,q2,q3,q6); % Angular Acceleration
+    dX(1) = dq1;
+    dX(2) = ddq1(dq1,dq2,q1,q2);
     % Link 2
     dX(3) = dq2;
-    dX(4) = ddq2(dq1,dq2,q1,q2,q3,q6);
-    % Fix the motors
-    % TODO: Remove this once testing is finished
+    dX(4) = ddq2(dq1,dq2,q1,q2);
     % Link 3 (motor)
-    dX(5) = X0(5);
-    dX(6) = X0(6);
+    dX(5) = X0(6);
+    dX(6) = 0;
     % Link 6 (motor)
-    dX(7) = X0(7);
-    dX(8) = X0(8);
+    dX(7) = X0(8);
+    dX(8) = 0;
     %{
+    % TODO: Put this back once testing is finished
+    % Link 1
+    dX(1) = dq1;                               % Angular Velocity
+    dX(2) = ddq1(dq1,dq2,dq3,dq6,q1,q2,q3,q6); % Angular Acceleration
+    % Link 2
+    dX(3) = dq2;
+    dX(4) = ddq2(dq1,dq2,dq3,dq6,q1,q2,q3,q6);
     % Link 3 (motor)
     dX(5) = dq3;
     dX(6) = ddq3(dq1,dq2,dq3,q1,q2,q3);

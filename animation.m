@@ -57,7 +57,7 @@ axis([-aLim aLim ... % x
 if exportVideo
     frameStep = 3;
 else
-    frameStep = 4;
+    frameStep = 2;
 end
 
 % Iterate over state data
