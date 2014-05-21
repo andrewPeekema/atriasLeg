@@ -42,20 +42,12 @@ function dX = dynamics(t,X)
     dX(4) = ddq2(dq1,dq2,dq3,dq6,q1,q2,q3,q6);
     % Link 3 (motor)
     dX(5) = dq3;
-    dX(6) = ddq3(dq1,dq2,dq3,q1,q2,q3);
+    %dX(6) = ddq3(dq1,dq2,dq3,q1,q2,q3);
+    dX(6) = ddq3(dq3,q3);
     % Link 6 (motor)
     dX(7) = dq6;
-    dX(8) = ddq6(dq1,dq6,q1,q6);
-
-    %{
-    % For testing with fixed motors
-    % Link 3 (motor)
-    dX(5) = X0(6);
-    dX(6) = 0;
-    % Link 6 (motor)
-    dX(7) = X0(8);
-    dX(8) = 0;
-    %}
+    %dX(8) = ddq6(dq1,dq6,q1,q6);
+    dX(8) = ddq6(dq6,q6);
 end % dynamics
 
 end % dynamicsSim

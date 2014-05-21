@@ -18,8 +18,8 @@ f = [dq1;
      eqs.ddq6];
 
 % y will be driven to zero
-%y = [q1 - q1des;
-%     q2 - q2des];
+y = [q3 - q3des;
+     q6 - q6des];
 
 % The state variables
 q = {'q1' 'dq1' 'q2' 'dq2' 'q3' 'dq3' 'q6' 'dq6'};
@@ -35,7 +35,6 @@ g = [0    0
      0    0;
      0    1/I6];
 
-%{
 % Gain matricies
 k1 = [2 0;
       0 2];
@@ -49,8 +48,6 @@ LgLfy = lieDerivative(Lfy,g,q);
 
 % The control
 u = -LgLfy\(Lfy2+k1*Lfy+k2*y);
-
-%}
 
 % Put the control into the dynamic equations
 eqs.ddq3 = eqs.ddq3 + g(6,1)*u(1);

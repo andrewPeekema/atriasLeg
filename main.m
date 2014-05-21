@@ -17,11 +17,11 @@ z = velocityEqns(k);
 % Solve the dynamics
 eqs = dynamicEqns(k,z);
 
-% TODO: Add feedback linearization instead of PD control
-%eqs = feedbackLinearization(eqs);
+% Add feedback linearization instead of PD control
+eqs = feedbackLinearization(eqs);
 
 % Use PD control
-eqs = pdControl(eqs);
+%eqs = pdControl(eqs);
 
 display('...equations of motion solved')
 
