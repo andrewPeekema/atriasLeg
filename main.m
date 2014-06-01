@@ -6,6 +6,7 @@ clc       % Clear the command prompt
 clear all % Remove all workspace variables
 close all % Close all figure windows
 
+tic
 display('Solving the equations of motion...')
 
 % Solve the kinematics
@@ -24,9 +25,11 @@ eqs = feedbackLinearization(k,eqs);
 %eqs = pdControl(eqs);
 
 display('...equations of motion solved')
+toc
 
 
 
+tic
 display('Simulating the dynamics...')
 
 % Substute constants into the dynamic equations
@@ -49,6 +52,7 @@ t = [0:0.01:2];
 sol = dynamicsSim(t,X0,ddq1,ddq2,ddq3,ddq6);
 
 display('...dynamics simulated')
+toc
 
 
 

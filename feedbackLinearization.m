@@ -21,7 +21,7 @@ f = [dq1;
 
 %% Derive the output equation (y)
 %% Find the desired spring torque
-syms m g ks q1 q2 q3 q6 real
+syms ks q1 q2 q3 q6 real
 
 % The desired end effector force
 % Virtual spring in the y direction
@@ -61,7 +61,7 @@ tau_h5 = ks*(q1-q6);
 y = [tau_h2 - tau_h2_des;
      tau_h5 - tau_h5_des];
 
-%% Alternative output formulation that fixes the motor angle
+%% Alternative output formulation that fixes motor angles
 %y = [q3 - q3des;
 %     q6 - q6des];
 
@@ -80,10 +80,8 @@ g = [0    0
      0    1/I6];
 
 % Gain matricies
-k1 = [200 0;
-      0 200];
-k2 = [40000 0;
-      0 40000];
+k1 = 200*eye(2,2);
+k2 = 40000*eye(2,2);
 
 % Take the lie derivatives necessary for the control
 Lfy   = lieDerivative(y,f,q);
@@ -91,7 +89,7 @@ Lfy2  = lieDerivative(Lfy,f,q);
 LgLfy = lieDerivative(Lfy,g,q);
 
 % The control
-u = -LgLfy\(Lfy2+k1*Lfy+k2*y);
+u = simplify(-LgLfy\(Lfy2+k1*Lfy+k2*y));
 
 % Put the control into the dynamic equations
 eqs.ddq3 = eqs.ddq3 + g(6,1)*u(1);
