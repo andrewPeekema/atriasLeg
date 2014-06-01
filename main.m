@@ -11,27 +11,6 @@ display('Solving the equations of motion...')
 % Solve the kinematics
 k = kinematicEqns;
 
-% Derive the output equation (y)
-% Find the desired spring torque
-syms FxDes FyDes m g ks q1 q2 q3 q6 r1 r2 real
-% Virtual spring in the y direction
-% TODO: Determine why FyDes doesn't seem to change the dynamics
-Ff0 = [FxDes; FyDes; 0; 0; 0; 0];
-Fh2 = k.h2f0.transAdj*Ff0;
-Fh5 = k.h5f0.transAdj*Ff0;
-tau_h2_des = Fh2(6);
-tau_h5_des = Fh5(6);
-
-% The actual spring torque
-tau_h2 = ks*((q1+q2)-q3);
-tau_h5 = ks*(q1-q6);
-
-% Regulate the desired spring torque to the actual spring torque.  y will be
-% driven to zero
-y = [tau_h2 - tau_h2_des;
-     tau_h5 - tau_h5_des];
-
-%{
 % Solve the velocity kinematics
 z = velocityEqns(k);
 
@@ -84,4 +63,3 @@ ylabel('q2 (rad)')
 % Animate the response
 exportVideo = false;
 animation(c,k,sol,exportVideo);
-%}
