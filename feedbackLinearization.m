@@ -24,32 +24,33 @@ f = [dq1;
 syms m g ks q1 q2 q3 q6 real
 
 % The desired end effector force
-FxDes = 0;
 % Virtual spring in the y direction
-%r0 = 0.5*2^0.5; % the rest length for all links at right angles
-%kVirt = 60000; % Virtual spring stiffness
-%FyDes = kVirt*(r0-k.h2f0.distance);
-FyDes = -m*g; % Counteract gravity
+r0 = 0.5*2^0.5; % the rest length for all links at right angles
+kVirt = 6000; % Virtual spring stiffness
+FyDes = kVirt*(r0 - k.h2f0.distance);
+% No force in the x direction
+FxDes = 0;
+% The wrench vector
 Ff0 = [FxDes; FyDes; 0; 0; 0; 0];
 
 % Move the desired force along one link
 Ff2 = k.f2f0.transAdj*Ff0;
-% Pin joint, remove all torque
-Ff2(4:6) = 0;
+% Pin joint, remove torque on the free axis
+Ff2(6) = 0;
 % Move the forces up the next link
 Fh2 = k.h2g2.transAdj*k.g2f2.transAdj*Ff2;
-% The desired torque counteracts this torque
-tau_h2_des = -Fh2(6);
+% The desired torque
+tau_h2_des = Fh2(6);
 
 % Repeat for the other member
 % Move the desired force along one link
 Ff5 = k.f5f0.transAdj*Ff0;
-% Pin joint, remove all torque
-Ff5(4:6) = 0;
+% Pin joint, remove torque on the free axis
+Ff5(6) = 0;
 % Move the forces up the next link
 Fh5 = k.h5g5.transAdj*k.g5f5.transAdj*Ff5;
-% The desired torque counteracts this torque
-tau_h5_des = -Fh5(6);
+% The desired torque
+tau_h5_des = Fh5(6);
 
 % The actual spring torque
 tau_h2 = ks*((q1+q2)-q3);

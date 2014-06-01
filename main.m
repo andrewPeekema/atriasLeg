@@ -43,7 +43,7 @@ X0 = [pi/4 ...   % q1 (rad)
       0];        % dq6
 
 % Time vector (s)
-t = [0:0.01:0.3];
+t = [0:0.01:2];
 
 % Integrate the time response of the system
 sol = dynamicsSim(t,X0,ddq1,ddq2,ddq3,ddq6);
