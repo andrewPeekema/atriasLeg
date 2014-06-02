@@ -62,8 +62,8 @@ y = [tau_h2 - tau_h2_des;
      tau_h5 - tau_h5_des];
 
 %% Alternative output formulation that fixes motor angles
-%y = [q3 - q3des;
-%     q6 - q6des];
+y = [q3 - q3des;
+     q6 - q6des];
 
 % The state variables
 q = {'q1' 'dq1' 'q2' 'dq2' 'q3' 'dq3' 'q6' 'dq6'};
