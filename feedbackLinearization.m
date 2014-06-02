@@ -25,14 +25,6 @@ syms ks q1 q2 q3 q6 real
 
 % The desired end effector force
 syms FxDes FyDes real
-%{
-% Virtual spring in the y direction
-r0 = 0.5*2^0.5; % the rest length for all links at right angles
-kVirt = 6000; % Virtual spring stiffness
-FyDes = kVirt*(r0 - k.h2f0.distance);
-% No force in the x direction
-FxDes = 0;
-%}
 % The wrench vector
 Ff0 = [FxDes; FyDes; 0; 0; 0; 0];
 
@@ -64,10 +56,6 @@ tau_h5 = ks*(q1-q6);
 y = [tau_h2 - tau_h2_des;
      tau_h5 - tau_h5_des];
 
-%% Alternative output formulation that fixes motor angles
-%y = [q3 - q3des;
-%     q6 - q6des];
-
 % The state variables
 q = {'q1' 'dq1' 'q2' 'dq2' 'q3' 'dq3' 'q6' 'dq6'};
 
@@ -88,10 +76,6 @@ k1 = [k1_11 0;
       0     k1_22];
 k2 = [k2_11 0;
       0     k2_22];
-%{
-k1 = 200*eye(2,2);
-k2 = 40000*eye(2,2);
-%}
 
 % Take the lie derivatives necessary for the control
 Lfy   = lieDerivative(y,f,q);
@@ -103,11 +87,5 @@ u = simplify(-LgLfy\(Lfy2+k1*Lfy+k2*y));
 
 % Return the control
 eqs = u;
-
-%{
-% Put the control into the dynamic equations
-eqs.ddq3 = eqs.ddq3 + g(6,1)*u(1);
-eqs.ddq6 = eqs.ddq6 + g(8,2)*u(2);
-%}
 
 end % function eqs
