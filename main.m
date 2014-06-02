@@ -21,6 +21,11 @@ eqs = dynamicEqns(k,z);
 % Add feedback linearization
 eqs = feedbackLinearization(k,eqs);
 
+% Convert the control to c code
+tauA = ccode(eqs(1));
+tauB = ccode(eqs(2));
+
+%{
 % Use PD control
 %eqs = pdControl(eqs);
 
@@ -67,3 +72,4 @@ ylabel('q2 (rad)')
 % Animate the response
 exportVideo = false;
 animation(c,k,sol,exportVideo);
+%}
