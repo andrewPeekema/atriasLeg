@@ -21,6 +21,8 @@ eqs = feedbackLinearization(k,eqs);
 % Convert the control torques to c code
 %tauA = ccode(eqs(1));
 %tauB = ccode(eqs(2));
+
+% Convert the control torques to matlab functions
 tauA = matlabFunction(eqs(1));
 tauB = matlabFunction(eqs(2));
 
@@ -46,11 +48,11 @@ cS = 1.49; % N*s/rad
 
 % Test the functions
 FxDes = 0;
-FyDes = 0;%-m*g;
-k1_11 = 0;
-k1_22 = 0;
-k2_11 = 0;
-k2_22 = 0;
+FyDes = 0;
+k1_11 = 1;
+k1_22 = 1;
+k2_11 = 1;
+k2_22 = 1;
 dq1 = 0;
 dq2 = 0;
 dq3 = 0;
@@ -60,5 +62,5 @@ q2 = pi/2;
 q3 = 3*pi/4;
 q6 = pi/4;
 
-testA = tauA(FxDes,FyDes,I3,c3,cS,dq1,dq2,dq3,dq6,g,k1_11,k2_11,ks,m,q1,q2,q3,q6,r1,r2);
-testB = tauB(FxDes,FyDes,I3,c3,cS,dq1,dq2,dq3,dq6,g,k1_22,k2_22,ks,m,q1,q2,q3,q6,r1,r2);
+testA = tauA(FxDes,FyDes,I3,c3,cS,dq1,dq2,dq3,dq6,g,k1_11,k2_11,ks,m,q1,q2,q3,q6,r1,r2)
+testB = tauB(FxDes,FyDes,I6,c6,cS,dq1,dq2,dq3,dq6,g,k1_22,k2_22,ks,m,q1,q2,q3,q6,r1,r2)
