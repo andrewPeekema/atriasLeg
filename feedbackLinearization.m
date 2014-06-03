@@ -20,6 +20,7 @@ f = [dq1;
 
 
 %% Derive the output equation (y)
+%{
 %% Find the desired spring torque
 syms ks q1 q2 q3 q6 real
 
@@ -60,10 +61,11 @@ tau_h5 = ks*(q1-q6);
 % driven to zero
 y = [tau_h2 - tau_h2_des;
      tau_h5 - tau_h5_des];
+%}
 
 %% Alternative output formulation that fixes motor angles
-y = [q3 - q3des;
-     q6 - q6des];
+y = [q3des - q3;
+     q6des - q6];
 
 % The state variables
 q = {'q1' 'dq1' 'q2' 'dq2' 'q3' 'dq3' 'q6' 'dq6'};
