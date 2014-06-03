@@ -20,15 +20,17 @@ f = [dq1;
 
 
 %% Derive the output equation (y)
-%{
 %% Find the desired spring torque
 syms ks q1 q2 q3 q6 real
 
 % The desired end effector force
-% Virtual spring in the y direction
-r0 = 0.5*2^0.5; % the rest length for all links at right angles
-kVirt = 6000; % Virtual spring stiffness
-FyDes = kVirt*(r0 - k.h2f0.distance);
+%% Virtual spring in the y direction
+%r0 = 0.5*2^0.5; % the rest length for all links at right angles
+%kVirt = 6000; % Virtual spring stiffness
+%FyDes = kVirt*(r0 - k.h2f0.distance);
+% Counteract gravity
+syms m g real
+FyDes = m*g;
 % No force in the x direction
 FxDes = 0;
 % The wrench vector
@@ -61,11 +63,10 @@ tau_h5 = ks*(q1-q6);
 % driven to zero
 y = [tau_h2 - tau_h2_des;
      tau_h5 - tau_h5_des];
-%}
 
 %% Alternative output formulation that fixes motor angles
-y = [q3des - q3;
-     q6des - q6];
+%y = [q3des - q3;
+%     q6des - q6];
 
 % The state variables
 q = {'q1' 'dq1' 'q2' 'dq2' 'q3' 'dq3' 'q6' 'dq6'};
