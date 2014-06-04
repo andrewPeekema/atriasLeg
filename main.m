@@ -28,6 +28,7 @@ tauB = matlabFunction(eqs(2));
 
 % Declare constants
 g = 9.81; % m/s^2
+%g = 0; % m/s^2
 % Link 1 and 5
 r1 = 0.5;  % length (m)
 % Link 2 and 4
@@ -48,7 +49,7 @@ cS = 1.49; % N*s/rad
 
 % Test the functions
 FxDes = 0;
-FyDes = 0;
+FyDes = 59.9*9.81;
 k1_11 = 10;
 k1_22 = 10;
 k2_11 = k1_11^2;
@@ -57,10 +58,14 @@ dq1 = 0;
 dq2 = 0;
 dq3 = 0;
 dq6 = 0;
-q1 = 1.0677;
-q2 = 1.04389;
-q3 = 2.11163;
-q6 = 1.067738;
+%q1 = pi/4;
+%q2 = pi/2;
+%q3 = 3*pi/4;
+%q6 = pi/4;
+q1 = 1.066;
+q2 = 1.044;
+q3 = 2.11;
+q6 = 1.066;
 % Insert some error into the desired angles
 %q3des = q3+0.1;
 %q6des = q6-0.1;
