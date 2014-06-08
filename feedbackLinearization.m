@@ -21,7 +21,7 @@ f = [dq1;
 
 %% Derive the output equation (y)
 %% Find the desired spring torque
-syms ks q1 q2 q3 q6 real
+syms ks cS q1 q2 q3 q6 real
 
 % The desired end effector force
 % Virtual spring in the y direction

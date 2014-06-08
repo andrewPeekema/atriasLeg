@@ -33,7 +33,7 @@ tic
 display('Simulating the dynamics...')
 
 % Substute constants into the dynamic equations
-[c ddq1 ddq2 ddq3 ddq6] = subConstants(eqs);
+[c eqs] = subConstants(eqs);
 
 % Initial state conditions
 X0 = [pi/4 ...   % q1 (rad)
@@ -49,7 +49,7 @@ X0 = [pi/4 ...   % q1 (rad)
 t = [0:0.01:3];
 
 % Integrate the time response of the system
-sol = dynamicsSim(t,X0,ddq1,ddq2,ddq3,ddq6);
+sol = dynamicsSim(t, X0, eqs.ddq1, eqs.ddq2, eqs.ddq3, eqs.ddq6);
 
 display('...dynamics simulated')
 toc
@@ -57,19 +57,21 @@ toc
 
 
 % Plot the response
-q1 = sol.X(:,1);
-q2 = sol.X(:,3);
-q3 = sol.X(:,5);
-q6 = sol.X(:,7);
-plot(sol.t,q1,'b');
+plot(sol.t,sol.X(:,1),'b');
 hold on
-plot(sol.t,q2,'r');
-plot(sol.t,q3,'g');
-plot(sol.t,q6,'k');
+plot(sol.t,sol.X(:,3),'r');
+plot(sol.t,sol.X(:,5),'g');
+plot(sol.t,sol.X(:,7),'k');
 title('State Space Response')
 xlabel('Time (sec)')
 ylabel('Angle (rad)')
 legend('q1','q2','q3','q4','Location','Best')
+
+% Find and plot the forces
+[Fx Fy legLength] = stateToForces(k,sol.X);
+
+figure
+plot(legLength,hypot(Fx,Fy));
 
 % Animate the response
 exportVideo = false;

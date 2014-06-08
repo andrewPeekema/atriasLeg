@@ -1,13 +1,10 @@
-function [c, ddq1, ddq2, ddq3, ddq6] = subConstants(eqs)
-% Substitute constants into the dynamic equations
+function [c, returnEqs] = subConstants(eqs)
+% Substitute constants into equations
 % Input
-%   eqs: Dynamic equations (ddq1, ddq2, ddq3, ddq6)
+%   eqs: struct of equations
 % Output
 %   c: struct of constants
-%   ddq1: Angular acceleration of q1
-%   ddq2: Angular acceleration of q2
-%   ddq3: Angular acceleration of q3
-%   ddq6: Angular acceleration of q6
+%   returnEqs: eqs with constants substituted
 
 % Declare constants
 g = 9.81; % m/s^2
@@ -27,7 +24,7 @@ c3 = 19; % N*s/rad
 c6 = c3;
 % Spring parameters
 ks = 1600; % N/rad
-cS = 1.49; % N*s/rad
+%cS = 1.49; % N*s/rad
 
 % PD control variables
 kp = 10000;
@@ -38,13 +35,14 @@ q6des  = pi/4;
 dq6des = 0;
 
 % Substitute constants into the dynamics
-ddq1 = matlabFunction(subs(eqs.ddq1));
-ddq2 = matlabFunction(subs(eqs.ddq2));
-ddq3 = matlabFunction(subs(eqs.ddq3));
-ddq6 = matlabFunction(subs(eqs.ddq6));
+returnEqs = structfun(@substitute,eqs,'UniformOutput',false);
 
 % Constants used for the animation
 c.r1 = r1;
 c.r2 = r2;
+
+function E = substitute(e)
+    E = matlabFunction(subs(e));
+end
 
 end % function

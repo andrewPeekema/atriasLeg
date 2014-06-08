@@ -46,14 +46,14 @@ syms dq3 dq6 c3 c6 real
 eqs(3) = eqs(3) + dq3*c3;
 eqs(4) = eqs(4) + dq6*c6;
 
-% Add spring damping
-% Find the virtual work (F*d), and take the derivative w.r.t. each of the variables
-syms dq1 dq2 cS real
-virtualWork = (dq6-dq1)*cS*(q6-q1) + (dq3-dq1-dq2)*cS*(q3-q1-q2);
-eqs(1) = eqs(1) + diff(virtualWork,q1);
-eqs(2) = eqs(2) + diff(virtualWork,q2);
-eqs(3) = eqs(3) + diff(virtualWork,q3);
-eqs(4) = eqs(4) + diff(virtualWork,q6);
+%% Add spring damping
+%% Find the virtual work (F*d), and take the derivative w.r.t. each of the variables
+%syms dq1 dq2 cS real
+%virtualWork = (dq6-dq1)*cS*(q6-q1) + (dq3-dq1-dq2)*cS*(q3-q1-q2);
+%eqs(1) = eqs(1) + diff(virtualWork,q1);
+%eqs(2) = eqs(2) + diff(virtualWork,q2);
+%eqs(3) = eqs(3) + diff(virtualWork,q3);
+%eqs(4) = eqs(4) + diff(virtualWork,q6);
 
 % Solve for acceleration
 syms ddq1 ddq2 ddq3 ddq6 real

@@ -2,6 +2,7 @@ function animation(c,k,sol,exportVideo)
 % 3D Visualization Template
 % Input
 %   c: Simulation constants
+%   k: kinematic equations in SE3
 %   sol: Simulation solution
 %   exportVideo: Should the video be exported? (True/False)
 % Output

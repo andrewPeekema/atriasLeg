@@ -36,19 +36,23 @@ function dX = dynamics(t,X)
     dX = zeros(8,1);
     % Link 1
     dX(1) = dq1;
-    dX(2) = ddq1(dq1,dq2,dq3,dq6,q1,q2,q3,q6);
+    %dX(2) = ddq1(dq1,dq2,dq3,dq6,q1,q2,q3,q6);
+    dX(2) = ddq1(dq1,dq2,q1,q2,q3,q6); % No spring damping
     % Link 2
     dX(3) = dq2;
-    dX(4) = ddq2(dq1,dq2,dq3,dq6,q1,q2,q3,q6);
+    %dX(4) = ddq2(dq1,dq2,dq3,dq6,q1,q2,q3,q6);
+    dX(4) = ddq2(dq1,dq2,q1,q2,q3,q6); % No spring damping
     % Link 3 (motor)
     dX(5) = dq3;
     %dX(6) = ddq3(dq1,dq2,dq3,q1,q2,q3); % No control
-    dX(6) = ddq3(dq1,dq2,dq3,dq6,q1,q2,q3,q6); % Force control
+    %dX(6) = ddq3(dq1,dq2,dq3,dq6,q1,q2,q3,q6); % Force control
+    dX(6) = ddq3(dq1,dq2,dq3,q1,q2,q3,q6); % Force control, no spring damping
     %dX(6) = ddq3(dq3,q3); % Fixed motor position
     % Link 6 (motor)
     dX(7) = dq6;
     %dX(8) = ddq6(dq1,dq6,q1,q6); % No control
-    dX(8) = ddq6(dq1,dq2,dq3,dq6,q1,q2,q3,q6); % Force control
+    %dX(8) = ddq6(dq1,dq2,dq3,dq6,q1,q2,q3,q6); % Force control
+    dX(8) = ddq6(dq1,dq2,dq6,q1,q2,q3,q6); % Force control, no spring damping
     %dX(8) = ddq6(dq6,q6); % Fixed motor position
 end % dynamics
 
