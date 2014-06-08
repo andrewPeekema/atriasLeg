@@ -72,6 +72,11 @@ legend('q1','q2','q3','q4','Location','Best')
 
 figure
 plot(legLength,hypot(Fx,Fy));
+title('Spring Response')
+xlabel('Leg Length (m)')
+ylabel('Ground Reaction Force (N)')
+xlim([0.45 0.75])
+ylim([0 1200])
 
 % Animate the response
 exportVideo = false;
