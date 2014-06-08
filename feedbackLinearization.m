@@ -24,13 +24,13 @@ f = [dq1;
 syms ks q1 q2 q3 q6 real
 
 % The desired end effector force
-%% Virtual spring in the y direction
-%r0 = 0.5*2^0.5; % the rest length for all links at right angles
-%kVirt = 6000; % Virtual spring stiffness
-%FyDes = kVirt*(r0 - k.h2f0.distance);
-% Counteract gravity
-syms m g real
-FyDes = m*g;
+% Virtual spring in the y direction
+r0 = 0.5*2^0.5; % the rest length for all links at right angles
+kVirt = 6000; % Virtual spring stiffness
+FyDes = kVirt*(r0 - k.h2f0.distance);
+%% Counteract gravity
+%syms m g real
+%FyDes = m*g;
 % No force in the x direction
 FxDes = 0;
 % The wrench vector
@@ -83,8 +83,8 @@ g = [0    0
      0    1/I6];
 
 % Gain matricies
-k1 = 200*eye(2,2);
-k2 = 40000*eye(2,2);
+k1 = 80*eye(2,2);
+k2 = 80^2*eye(2,2);
 
 % Take the lie derivatives necessary for the control
 Lfy   = lieDerivative(y,f,q);

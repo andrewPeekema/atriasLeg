@@ -46,7 +46,7 @@ X0 = [pi/4 ...   % q1 (rad)
       0];        % dq6
 
 % Time vector (s)
-t = [0:0.01:0.2];
+t = [0:0.01:3];
 
 % Integrate the time response of the system
 sol = dynamicsSim(t,X0,ddq1,ddq2,ddq3,ddq6);
@@ -59,10 +59,17 @@ toc
 % Plot the response
 q1 = sol.X(:,1);
 q2 = sol.X(:,3);
-plot(q1,q2,'.');
+q3 = sol.X(:,5);
+q6 = sol.X(:,7);
+plot(sol.t,q1,'b');
+hold on
+plot(sol.t,q2,'r');
+plot(sol.t,q3,'g');
+plot(sol.t,q6,'k');
 title('State Space Response')
-xlabel('q1 (rad)')
-ylabel('q2 (rad)')
+xlabel('Time (sec)')
+ylabel('Angle (rad)')
+legend('q1','q2','q3','q4','Location','Best')
 
 % Animate the response
 exportVideo = false;
