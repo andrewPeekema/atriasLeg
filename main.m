@@ -22,7 +22,7 @@ eqs = dynamicEqns(k,z);
 eqs = feedbackLinearization(k,eqs);
 
 % Use PD control
-%eqs = pdControl(eqs);
+eqs = pdControl(eqs);
 
 display('...equations of motion solved')
 toc
@@ -79,5 +79,5 @@ xlim([0.45 0.75])
 ylim([0 1200])
 
 % Animate the response
-exportVideo = false;
+exportVideo = true;
 animation(c,k,sol,exportVideo);

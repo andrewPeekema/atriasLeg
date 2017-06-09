@@ -96,7 +96,7 @@ for it = 1:frameStep:length(sol.t)
     % Save the frames
     if exportVideo
         frame = getframe(h.figure);
-        imwrite(frame.cdata, sprintf('./video/%04d.png',it));
+        imwrite(frame.cdata, 'C:/Users/Francis/desktop/image.png');
     end
 end % for it = ...
 
